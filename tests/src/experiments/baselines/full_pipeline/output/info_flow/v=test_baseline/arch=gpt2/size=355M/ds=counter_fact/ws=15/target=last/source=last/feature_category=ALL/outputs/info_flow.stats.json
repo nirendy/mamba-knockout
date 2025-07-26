@@ -1,0 +1,14 @@
+{
+    "complete_prompt_ids": [
+        74,
+        140,
+        148,
+        53,
+        182,
+        59,
+        93
+    ],
+    "partial_prompt_ids": {},
+    "banned_prompt_ids": [],
+    "layers_amount": 10
+}

@@ -1,0 +1,1194 @@
+{
+    "figure1": {
+        "plot_id": "figure1",
+        "title": "Figure 1: Relative change in correct-token prediction probability when removing information flow to the $$source$$ token from various source tokens",
+        "description": "$$title$$. The x-axis represents the $$x_axis_label$$ of the first layer within the $$window_size$$-layer attention knockout window, while the y-axis indicates the resulting $$y_axis_label$$ change. The plots present model performance when knocking out $$enumerate(source_tokens)$$. $$observation$$. For ablations on ??dataset selection?? see Section A.2. See Section B for extended implementation details.",
+        "order": 1,
+        "observation": "Notice that subject token knockout yields a consistent performance drop across models and similar layer-specific effects, highlighting the crucial role of subject tokens in LLMs. In contrast, knockouts of other tokens produce less robust and more variable outcomes.",
+        "notes": "dataset doesn't seem like the right word choise here",
+        "experiment_name": "info_flow",
+        "params": [
+            {
+                "param": "model_arch_and_size",
+                "orientation": "lines",
+                "values": [
+                    [
+                        "mamba1",
+                        "2.8B"
+                    ],
+                    [
+                        "mamba2",
+                        "2.7B"
+                    ],
+                    [
+                        "gpt2",
+                        "1.5B"
+                    ],
+                    [
+                        "mamba1",
+                        "7B-falcon"
+                    ]
+                ]
+            },
+            {
+                "param": "source",
+                "orientation": "cols",
+                "values": [
+                    "subject",
+                    "relation",
+                    "last",
+                    "first"
+                ]
+            },
+            {
+                "param": "window_size",
+                "values": [
+                    9
+                ]
+            },
+            {
+                "param": "filteration_factory",
+                "values": [
+                    {
+                        "type": "preset",
+                        "preset_id": "all_correct"
+                    }
+                ]
+            },
+            {
+                "param": "feature_category",
+                "values": [
+                    "ALL"
+                ]
+            },
+            {
+                "param": "target",
+                "values": [
+                    "last"
+                ]
+            }
+        ],
+        "cell_plot_config": {
+            "custom_colors": {
+                "mamba1-2.8B": "#0202da",
+                "mamba2-2.7B": "#0f710f",
+                "gpt2-1.5B": "#a41908",
+                "mamba1-7B-falcon": "#deaa46"
+            }
+        }
+    },
+    "figure3_4_5": {
+        "plot_id": "figure3_4_5",
+        "title": "Figure 3: Relative change in correct-token prediction probability when removing information flow to the final token from various source tokens across $$model_arch$$ models of varying sizes",
+        "description": "$$title$$. This figure is identical to Figure 1, but presents the performace of $$model_arch$$ models of sizes $$list(model_sizes)$$. $$observation$$. For further details see Figure 1 and Section B. For ablations on window size see Section 4.6.",
+        "order": 30,
+        "observation": "As observed in other models, subject token knockout consistently reduces performance. Unique to Mamba-1, knockouts of relation tokens and of the final token in the ultimate layers initially lower the correct-token probability before a pronounced increase.",
+        "experiment_name": "info_flow",
+        "params": [
+            {
+                "param": "model_arch_and_size",
+                "orientation": "lines",
+                "values": [
+                    [
+                        "mamba1",
+                        "130M"
+                    ],
+                    [
+                        "mamba2",
+                        "130M"
+                    ],
+                    [
+                        "mamba2",
+                        "1.3B"
+                    ],
+                    [
+                        "mamba1",
+                        "1.4B"
+                    ],
+                    [
+                        "mamba1",
+                        "2.8B"
+                    ],
+                    [
+                        "mamba2",
+                        "2.7B"
+                    ],
+                    [
+                        "gpt2",
+                        "355M"
+                    ],
+                    [
+                        "gpt2",
+                        "774M"
+                    ],
+                    [
+                        "gpt2",
+                        "1.5B"
+                    ],
+                    [
+                        "mamba1",
+                        "7B-falcon"
+                    ]
+                ]
+            },
+            {
+                "param": "source",
+                "orientation": "cols",
+                "values": [
+                    "subject",
+                    "relation",
+                    "last",
+                    "first"
+                ]
+            },
+            {
+                "param": "model_family",
+                "orientation": "grids",
+                "values": [
+                    "mamba1",
+                    "mamba2",
+                    "gpt2"
+                ]
+            },
+            {
+                "param": "filteration_factory",
+                "values": [
+                    {
+                        "type": "preset",
+                        "preset_id": "all_correct"
+                    }
+                ]
+            },
+            {
+                "param": "target",
+                "values": [
+                    "last"
+                ]
+            },
+            {
+                "param": "feature_category",
+                "values": [
+                    "ALL"
+                ]
+            },
+            {
+                "param": "window_size",
+                "values": [
+                    9
+                ]
+            }
+        ],
+        "cell_plot_config": {
+            "diff_plot_meta_data": {
+                "title": "Probability Difference",
+                "ylabel": "Probability Diff. (%)",
+                "axhline_value": 0.0,
+                "ylim_min": -90.0,
+                "ylim_max": 40.0
+            },
+            "custom_colors": {
+                "mamba1-130M": "#0202da",
+                "mamba1-1.4B": "#0f710f",
+                "mamba1-2.8B": "#a41908",
+                "mamba1-7B-falcon": "#deaa46",
+                "mamba2-130M": "#0202da",
+                "mamba2-1.3B": "#0f710f",
+                "mamba2-2.7B": "#a41908",
+                "gpt2-355M": "#0202da",
+                "gpt2-774M": "#0f710f",
+                "gpt2-1.5B": "#a41908"
+            }
+        }
+    },
+    "figure6": {
+        "plot_id": "figure6",
+        "title": "Figure 6: Relative change in correct-token probability when knocking out connections from subject tokens to the last token across different feature categories for $$enumerate(model_arch)$$.",
+        "description": "We compare knockout on the features in three settings: $$list(feature_categories + legend_color)$$. $$observation$$. For implemtation details see Section B.",
+        "order": 60,
+        "observation": "Notably, knocking out context-dependent features alone closely mirrors the effect of removing all features.",
+        "experiment_name": "info_flow",
+        "params": [
+            {
+                "param": "feature_category",
+                "orientation": "lines",
+                "values": [
+                    "ALL",
+                    "FAST_DECAY",
+                    "SLOW_DECAY"
+                ]
+            },
+            {
+                "param": "source",
+                "orientation": "rows",
+                "values": [
+                    "subject"
+                ]
+            },
+            {
+                "param": "model_arch_and_size",
+                "orientation": "cols",
+                "values": [
+                    [
+                        "mamba1",
+                        "2.8B"
+                    ],
+                    [
+                        "mamba2",
+                        "2.7B"
+                    ],
+                    [
+                        "mamba1",
+                        "7B"
+                    ],
+                    [
+                        "mamba1",
+                        "7B-falcon"
+                    ]
+                ]
+            },
+            {
+                "param": "target",
+                "values": [
+                    "last"
+                ]
+            },
+            {
+                "param": "window_size",
+                "values": [
+                    9
+                ]
+            },
+            {
+                "param": "filteration_factory",
+                "values": [
+                    {
+                        "type": "preset",
+                        "preset_id": "all_correct"
+                    }
+                ]
+            }
+        ],
+        "cell_plot_config": {
+            "diff_plot_meta_data": {
+                "title": "Probability Difference",
+                "ylabel": "Probability Diff. (%)",
+                "axhline_value": 0.0,
+                "ylim_min": -40.0,
+                "ylim_max": 10.0
+            },
+            "custom_colors": {
+                "ALL": "#0202da",
+                "FAST_DECAY": "#0f710f",
+                "SLOW_DECAY": "#a41908"
+            },
+            "custom_line_labels": {
+                "ALL": "All",
+                "FAST_DECAY": "Context-dependent",
+                "SLOW_DECAY": "Context-independent"
+            }
+        },
+        "combine_plot_config": {
+            "label_font_size": 60
+        }
+    },
+    "figure8_9_10": {
+        "plot_id": "figure8_9_10",
+        "title": "Figure 8: Relative change in correct-token probability after removing the information flow to the final token from various source tokens for $$model_arch$$ $$model_size$$ across different window sizes.",
+        "description": "$$title$$ $$observation$$. This figure, which parallels Figure 1, displays performance for window sizes of $$list(window_sizes)$$. $$observation$$. For additional details, see Figure 1 and Section B.",
+        "order": 80,
+        "observation": "The qualitative patterns observed for $$model_arch$$ $$model_size$$ remain consistent, with larger window sizes amplifying these effects. ",
+        "notes": "i think we should use the mamba1/2 2.8b",
+        "experiment_name": "info_flow",
+        "params": [
+            {
+                "param": "window_size",
+                "orientation": "lines",
+                "values": [
+                    1,
+                    3,
+                    5,
+                    9,
+                    12,
+                    15
+                ]
+            },
+            {
+                "param": "model_arch_and_size",
+                "orientation": "grids",
+                "values": [
+                    [
+                        "mamba1",
+                        "130M"
+                    ],
+                    [
+                        "mamba1",
+                        "1.4B"
+                    ],
+                    [
+                        "mamba1",
+                        "2.8B"
+                    ]
+                ]
+            },
+            {
+                "param": "source",
+                "orientation": "cols",
+                "values": [
+                    "subject",
+                    "relation",
+                    "last",
+                    "first"
+                ]
+            },
+            {
+                "param": "feature_category",
+                "values": [
+                    "ALL"
+                ]
+            },
+            {
+                "param": "target",
+                "values": [
+                    "last"
+                ]
+            },
+            {
+                "param": "filteration_factory",
+                "values": [
+                    {
+                        "type": "preset",
+                        "preset_id": "all_correct"
+                    }
+                ]
+            }
+        ],
+        "cell_plot_config": {
+            "diff_plot_meta_data": {
+                "title": "Probability Difference",
+                "ylabel": "Probability Diff. (%)",
+                "axhline_value": 0.0,
+                "ylim_min": -100.0,
+                "ylim_max": 20.0
+            },
+            "custom_colors": {
+                "1": "#bce6ff",
+                "3": "#88c7e8",
+                "5": "#5ca8d0",
+                "9": "#3a85b5",
+                "12": "#1a578a",
+                "15": "#042652"
+            }
+        }
+    },
+    "ds_ablation": {
+        "plot_id": "ds_ablation",
+        "title": "Figure 14: Relative change in correct-token probability after knocking out connection from each token to the last token.",
+        "description": "on all the samples each model of $$enumerate(model_arch_and_size)$$ was correct on. X-axis indicates the relative depth of the layer we perform knockout on. Y-axis indicates the relative change in correct-token probability. Different colors indicate the source token.",
+        "order": 140,
+        "notes": "dataset doesn't seem like the right word choise here",
+        "is_appendix": true,
+        "experiment_name": "info_flow",
+        "params": [
+            {
+                "param": "source",
+                "orientation": "lines",
+                "values": [
+                    "subject",
+                    "relation",
+                    "last",
+                    "first"
+                ]
+            },
+            {
+                "param": "filteration_factory",
+                "orientation": "rows",
+                "values": [
+                    {
+                        "type": "current_model",
+                        "correctness": "correct"
+                    },
+                    {
+                        "type": "preset",
+                        "preset_id": "all_correct"
+                    }
+                ]
+            },
+            {
+                "param": "model_arch_and_size",
+                "orientation": "cols",
+                "values": [
+                    [
+                        "mamba1",
+                        "2.8B"
+                    ],
+                    [
+                        "mamba2",
+                        "2.7B"
+                    ],
+                    [
+                        "gpt2",
+                        "1.5B"
+                    ],
+                    [
+                        "mamba1",
+                        "7B-falcon"
+                    ]
+                ]
+            },
+            {
+                "param": "target",
+                "values": [
+                    "last"
+                ]
+            },
+            {
+                "param": "feature_category",
+                "values": [
+                    "ALL"
+                ]
+            },
+            {
+                "param": "window_size",
+                "values": [
+                    9
+                ]
+            }
+        ],
+        "cell_plot_config": {
+            "show_number_of_points": "auto",
+            "add_number_of_points_in_box": true,
+            "custom_colors": {
+                "subject": "#0202da",
+                "relation": "#0f710f",
+                "last": "#a41908",
+                "first": "#deaa46"
+            }
+        },
+        "combine_plot_config": {
+            "show_row_labels": true,
+            "rows_labels_override": {
+                "current model - correct": "  Each Model Correct",
+                "Preset: all_correct": "      All Models Correct"
+            },
+            "label_font_size": 55,
+            "crop_params": {}
+        }
+    },
+    "figure3+": {
+        "plot_id": "figure3+",
+        "title": "Figure 3: Relative change in correct-token prediction probability when removing information flow to the final token from various source tokens across $$model_arch$$ models of varying sizes",
+        "description": "$$title$$. This figure is identical to Figure 1, but presents the performace of $$model_arch$$ models of sizes $$list(model_sizes)$$. $$observation$$. For further details see Figure 1 and Section B. For ablations on window size see Section 4.6.",
+        "order": 30,
+        "observation": "As observed in other models, subject token knockout consistently reduces performance. Unique to Mamba-1, knockouts of relation tokens and of the final token in the ultimate layers initially lower the correct-token probability before a pronounced increase.",
+        "is_appendix": true,
+        "experiment_name": "info_flow",
+        "params": [
+            {
+                "param": "model_arch_and_size",
+                "orientation": "lines",
+                "values": [
+                    [
+                        "mamba1",
+                        "130M"
+                    ],
+                    [
+                        "mamba2",
+                        "130M"
+                    ],
+                    [
+                        "mamba2",
+                        "1.3B"
+                    ],
+                    [
+                        "mamba1",
+                        "1.4B"
+                    ],
+                    [
+                        "mamba1",
+                        "2.8B"
+                    ],
+                    [
+                        "mamba2",
+                        "2.7B"
+                    ],
+                    [
+                        "gpt2",
+                        "355M"
+                    ],
+                    [
+                        "gpt2",
+                        "774M"
+                    ],
+                    [
+                        "gpt2",
+                        "1.5B"
+                    ],
+                    [
+                        "llama3.2",
+                        "1B"
+                    ],
+                    [
+                        "llama3.2",
+                        "3B"
+                    ],
+                    [
+                        "mistral0.1",
+                        "7B"
+                    ],
+                    [
+                        "mistral0.3",
+                        "7B"
+                    ],
+                    [
+                        "llama3",
+                        "8B"
+                    ]
+                ]
+            },
+            {
+                "param": "model_family",
+                "orientation": "rows",
+                "values": [
+                    "mamba1",
+                    "mamba2",
+                    "llama",
+                    "mistral",
+                    "gpt2"
+                ]
+            },
+            {
+                "param": "source",
+                "orientation": "cols",
+                "values": [
+                    "subject",
+                    "relation",
+                    "last",
+                    "first"
+                ]
+            },
+            {
+                "param": "target",
+                "values": [
+                    "last"
+                ]
+            },
+            {
+                "param": "window_size",
+                "values": [
+                    9
+                ]
+            },
+            {
+                "param": "filteration_factory",
+                "values": [
+                    {
+                        "type": "preset",
+                        "preset_id": "all_correct"
+                    }
+                ]
+            },
+            {
+                "param": "feature_category",
+                "values": [
+                    "ALL"
+                ]
+            }
+        ],
+        "cell_plot_config": {
+            "diff_plot_meta_data": {
+                "title": "Probability Difference",
+                "ylabel": "Probability Diff. (%)",
+                "axhline_value": 0.0,
+                "ylim_min": -90.0,
+                "ylim_max": 40.0
+            },
+            "custom_colors": {
+                "mamba1-130M": "#0202da",
+                "mamba1-1.4B": "#0f710f",
+                "mamba1-2.8B": "#a41908",
+                "mamba2-130M": "#0202da",
+                "mamba2-1.3B": "#0f710f",
+                "mamba2-2.7B": "#a41908",
+                "gpt2-355M": "#0202da",
+                "gpt2-774M": "#0f710f",
+                "gpt2-1.5B": "#a41908",
+                "llama3.2-1B": "#0202da",
+                "llama3.2-3B": "#0f710f",
+                "llama3-8B": "#a41908",
+                "mistral0.1-7B": "#0202da",
+                "mistral0.3-7B": "#0f710f"
+            }
+        },
+        "combine_plot_config": {
+            "show_row_labels": true
+        }
+    },
+    "figure6+": {
+        "plot_id": "figure6+",
+        "title": "Figure 6: Relative change in correct-token probability when knocking out connections from subject tokens to the last token across different feature categories for $$enumerate(model_arch)$$.",
+        "description": "We compare knockout on the features in three settings: $$list(feature_categories + legend_color)$$. $$observation$$. For implemtation details see Section B.",
+        "order": 60,
+        "observation": "Notably, knocking out context-dependent features alone closely mirrors the effect of removing all features.",
+        "is_appendix": true,
+        "experiment_name": "info_flow",
+        "params": [
+            {
+                "param": "feature_category",
+                "orientation": "lines",
+                "values": [
+                    "ALL",
+                    "FAST_DECAY",
+                    "SLOW_DECAY"
+                ]
+            },
+            {
+                "param": "model_arch_and_size",
+                "orientation": "rows",
+                "values": [
+                    [
+                        "mamba1",
+                        "130M"
+                    ],
+                    [
+                        "mamba2",
+                        "130M"
+                    ],
+                    [
+                        "mamba2",
+                        "1.3B"
+                    ],
+                    [
+                        "mamba1",
+                        "1.4B"
+                    ],
+                    [
+                        "mamba1",
+                        "2.8B"
+                    ],
+                    [
+                        "mamba2",
+                        "2.7B"
+                    ],
+                    [
+                        "mamba1",
+                        "7B"
+                    ],
+                    [
+                        "mamba1",
+                        "7B-falcon"
+                    ]
+                ]
+            },
+            {
+                "param": "source",
+                "orientation": "cols",
+                "values": [
+                    "subject",
+                    "relation",
+                    "last",
+                    "first"
+                ]
+            },
+            {
+                "param": "filteration_factory",
+                "values": [
+                    {
+                        "type": "preset",
+                        "preset_id": "all_correct"
+                    }
+                ]
+            },
+            {
+                "param": "target",
+                "values": [
+                    "last"
+                ]
+            },
+            {
+                "param": "window_size",
+                "values": [
+                    9
+                ]
+            }
+        ],
+        "cell_plot_config": {
+            "diff_plot_meta_data": {
+                "title": "Probability Difference",
+                "ylabel": "Probability Diff. (%)",
+                "axhline_value": 0.0,
+                "ylim_min": -60.0,
+                "ylim_max": 10.0
+            },
+            "custom_colors": {
+                "ALL": "#0202da",
+                "FAST_DECAY": "#0f710f",
+                "SLOW_DECAY": "#a41908"
+            },
+            "custom_line_labels": {
+                "ALL": "All",
+                "FAST_DECAY": "Context-dependent",
+                "SLOW_DECAY": "Context-independent"
+            }
+        },
+        "combine_plot_config": {
+            "show_row_labels": true
+        }
+    },
+    "figure8+": {
+        "plot_id": "figure8+",
+        "title": "Figure 8",
+        "description": "Figure 8",
+        "order": 81,
+        "is_appendix": true,
+        "experiment_name": "info_flow",
+        "params": [
+            {
+                "param": "window_size",
+                "orientation": "lines",
+                "values": [
+                    1,
+                    3,
+                    5,
+                    9,
+                    12,
+                    15
+                ]
+            },
+            {
+                "param": "model_arch_and_size",
+                "orientation": "rows",
+                "values": [
+                    [
+                        "mamba1",
+                        "130M"
+                    ],
+                    [
+                        "mamba2",
+                        "130M"
+                    ],
+                    [
+                        "mamba2",
+                        "1.3B"
+                    ],
+                    [
+                        "mamba1",
+                        "1.4B"
+                    ],
+                    [
+                        "mamba1",
+                        "2.8B"
+                    ],
+                    [
+                        "mamba2",
+                        "2.7B"
+                    ],
+                    [
+                        "mamba1",
+                        "7B"
+                    ],
+                    [
+                        "mamba1",
+                        "7B-falcon"
+                    ],
+                    [
+                        "gpt2",
+                        "355M"
+                    ],
+                    [
+                        "gpt2",
+                        "774M"
+                    ],
+                    [
+                        "gpt2",
+                        "1.5B"
+                    ],
+                    [
+                        "llama3.2",
+                        "3B"
+                    ],
+                    [
+                        "mistral0.1",
+                        "7B"
+                    ],
+                    [
+                        "mistral0.3",
+                        "7B"
+                    ],
+                    [
+                        "llama3",
+                        "8B"
+                    ]
+                ]
+            },
+            {
+                "param": "model_family",
+                "orientation": "grids",
+                "values": [
+                    "mamba2",
+                    "transformer"
+                ]
+            },
+            {
+                "param": "source",
+                "orientation": "cols",
+                "values": [
+                    "subject",
+                    "relation",
+                    "last",
+                    "first"
+                ]
+            },
+            {
+                "param": "feature_category",
+                "values": [
+                    "ALL"
+                ]
+            },
+            {
+                "param": "target",
+                "values": [
+                    "last"
+                ]
+            },
+            {
+                "param": "filteration_factory",
+                "values": [
+                    {
+                        "type": "preset",
+                        "preset_id": "all_correct"
+                    }
+                ]
+            }
+        ],
+        "cell_plot_config": {
+            "diff_plot_meta_data": {
+                "title": "Probability Difference",
+                "ylabel": "Probability Diff. (%)",
+                "axhline_value": 0.0,
+                "ylim_min": -100.0,
+                "ylim_max": 20.0
+            },
+            "custom_colors": {
+                "1": "#afcff3",
+                "3": "#9ecae1",
+                "5": "#6baed6",
+                "9": "#4292c6",
+                "12": "#2171b5",
+                "15": "#084594"
+            }
+        },
+        "combine_plot_config": {
+            "show_row_labels": true
+        }
+    },
+    "heatmap": {
+        "plot_id": "heatmap",
+        "title": "Heatmap Plot",
+        "description": "Heatmap visualization of information flow between tokens for specific prompts.",
+        "order": 9000,
+        "is_appendix": true,
+        "experiment_name": "heatmap",
+        "params": [
+            {
+                "param": "window_size",
+                "orientation": "grids",
+                "values": [
+                    9
+                ]
+            },
+            {
+                "param": "prompt_idx",
+                "orientation": "rows",
+                "values": [
+                    17261,
+                    4561,
+                    17046,
+                    17617,
+                    20790,
+                    16431,
+                    21157,
+                    4712,
+                    4836,
+                    4915,
+                    4869,
+                    15672,
+                    13496,
+                    14671,
+                    17897,
+                    15508,
+                    18491,
+                    20825,
+                    18845,
+                    21485
+                ]
+            },
+            {
+                "param": "model_arch_and_size",
+                "orientation": "cols",
+                "values": [
+                    [
+                        "mamba1",
+                        "2.8B"
+                    ],
+                    [
+                        "mamba2",
+                        "2.7B"
+                    ],
+                    [
+                        "gpt2",
+                        "1.5B"
+                    ],
+                    [
+                        "mamba1",
+                        "7B-falcon"
+                    ],
+                    [
+                        "mamba1",
+                        "7B-falcon-base"
+                    ],
+                    [
+                        "mamba1",
+                        "7B"
+                    ],
+                    [
+                        "llama3.2",
+                        "1B"
+                    ],
+                    [
+                        "llama3.2",
+                        "3B"
+                    ],
+                    [
+                        "mistral0.1",
+                        "7B"
+                    ],
+                    [
+                        "mistral0.3",
+                        "7B"
+                    ],
+                    [
+                        "llama3",
+                        "8B"
+                    ]
+                ]
+            }
+        ],
+        "cell_plot_config": {}
+    },
+    "heatmaps_per_model_sizes_and_archs": {
+        "plot_id": "heatmaps_per_model_sizes_and_archs",
+        "title": "Heatmaps Per Model Sizes and Archs",
+        "description": "Relative change in correct-token probability\nafter knocking out connection from each token to the last\ntoken.",
+        "order": 12,
+        "is_appendix": true,
+        "experiment_name": "heatmap",
+        "params": [
+            {
+                "param": "model_arch_and_size",
+                "orientation": "rows",
+                "values": [
+                    [
+                        "mamba1",
+                        "130M"
+                    ],
+                    [
+                        "mamba2",
+                        "130M"
+                    ],
+                    [
+                        "mamba1",
+                        "1.4B"
+                    ],
+                    [
+                        "mamba2",
+                        "1.3B"
+                    ],
+                    [
+                        "mamba1",
+                        "2.8B"
+                    ],
+                    [
+                        "mamba2",
+                        "2.7B"
+                    ],
+                    [
+                        "mamba1",
+                        "7B"
+                    ],
+                    [
+                        "mamba1",
+                        "7B-falcon-base"
+                    ],
+                    [
+                        "mamba1",
+                        "7B-falcon"
+                    ],
+                    [
+                        "gpt2",
+                        "355M"
+                    ],
+                    [
+                        "gpt2",
+                        "774M"
+                    ],
+                    [
+                        "gpt2",
+                        "1.5B"
+                    ],
+                    [
+                        "llama3.2",
+                        "1B"
+                    ],
+                    [
+                        "llama3.2",
+                        "3B"
+                    ],
+                    [
+                        "mistral0.1",
+                        "7B"
+                    ],
+                    [
+                        "mistral0.3",
+                        "7B"
+                    ],
+                    [
+                        "llama3",
+                        "8B"
+                    ]
+                ]
+            },
+            {
+                "param": "model_family",
+                "orientation": "grids",
+                "values": [
+                    "mamba",
+                    "transformer"
+                ]
+            },
+            {
+                "param": "prompt_idx",
+                "orientation": "cols",
+                "values": [
+                    18566,
+                    2720,
+                    16634,
+                    140
+                ]
+            },
+            {
+                "param": "window_size",
+                "values": [
+                    9
+                ]
+            }
+        ],
+        "cell_plot_config": {
+            "figure_width": 6.0,
+            "figure_height": 5.0,
+            "fontsize": 20,
+            "tick_fontsize": 18,
+            "base_prob_text_fontsize": 15,
+            "base_prob_text_x_pos": 0.92
+        },
+        "combine_plot_config": {
+            "show_row_labels": true,
+            "show_col_labels": false,
+            "column_prefix_style": "none",
+            "label_font_size": 45,
+            "crop_params": {
+                "edge_crop": {
+                    "top": 16.98,
+                    "width": 100.0,
+                    "height": 81.13
+                },
+                "standard_crop": {
+                    "top": 17.32,
+                    "width": 100.0,
+                    "height": 73.88999999999999
+                }
+            }
+        }
+    },
+    "heatmaps_per_ws": {
+        "plot_id": "heatmaps_per_ws",
+        "title": "Heatmaps Per Window Size",
+        "description": "Relative change in correct-token probability\nafter knocking out connection from each token to the last\ntoken.",
+        "order": 12,
+        "is_appendix": true,
+        "experiment_name": "heatmap",
+        "params": [
+            {
+                "param": "model_arch_and_size",
+                "orientation": "grids",
+                "values": [
+                    [
+                        "mamba1",
+                        "2.8B"
+                    ],
+                    [
+                        "mamba2",
+                        "2.7B"
+                    ],
+                    [
+                        "gpt2",
+                        "1.5B"
+                    ]
+                ]
+            },
+            {
+                "param": "prompt_idx",
+                "orientation": "rows",
+                "values": [
+                    18566,
+                    2720,
+                    16634,
+                    140
+                ]
+            },
+            {
+                "param": "window_size",
+                "orientation": "cols",
+                "values": [
+                    1,
+                    5,
+                    9,
+                    15
+                ]
+            }
+        ],
+        "cell_plot_config": {
+            "figure_width": 6.0,
+            "figure_height": 5.0,
+            "fontsize": 20,
+            "tick_fontsize": 18,
+            "base_prob_text_fontsize": 15,
+            "base_prob_text_x_pos": 0.92
+        },
+        "combine_plot_config": {
+            "column_prefix_style": "none",
+            "columns_labels_override": {
+                "1": "Window Size = 1",
+                "5": "Window Size = 5",
+                "9": "Window Size = 9",
+                "15": "Window Size = 15"
+            },
+            "label_font_size": 45,
+            "crop_params": {
+                "edge_crop": {
+                    "top": 16.98,
+                    "width": 100.0,
+                    "height": 81.13
+                },
+                "standard_crop": {
+                    "top": 17.32,
+                    "width": 100.0,
+                    "height": 73.88999999999999
+                }
+            },
+            "legend_params": {
+                "show_divider": false,
+                "legend_padding": 0
+            }
+        }
+    }
+}

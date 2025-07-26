@@ -1,0 +1,82 @@
+{
+  "builder_name": "parquet",
+  "citation": "",
+  "config_name": "default",
+  "dataset_name": "counterfact-tracing",
+  "dataset_size": 3400668,
+  "description": "",
+  "download_checksums": {
+    "hf://datasets/NeelNanda/counterfact-tracing@c945b082ca08d0a8f3ba227fb78404a09614c36e/data/train-00000-of-00001-36693f2cad948c42.parquet": {
+      "num_bytes": 1109314,
+      "checksum": null
+    }
+  },
+  "download_size": 1109314,
+  "features": {
+    "relation": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "relation_prefix": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "relation_suffix": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "prompt": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "relation_id": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "target_false_id": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "target_true_id": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "target_true": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "target_false": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "subject": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "original_idx": {
+      "dtype": "int64",
+      "_type": "Value"
+    },
+    "split": {
+      "dtype": "string",
+      "_type": "Value"
+    }
+  },
+  "homepage": "",
+  "license": "",
+  "size_in_bytes": 4509982,
+  "splits": {
+    "train": {
+      "name": "train",
+      "num_bytes": 3400668,
+      "num_examples": 21919,
+      "dataset_name": "counterfact-tracing"
+    }
+  },
+  "version": {
+    "version_str": "0.0.0",
+    "major": 0,
+    "minor": 0,
+    "patch": 0
+  }
+}

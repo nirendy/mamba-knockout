@@ -1,0 +1,31 @@
+{
+    "variant_params": {
+        "model_arch": "qwen2.5",
+        "model_size": "0.5B",
+        "window_size": 3
+    },
+    "input_params": {
+        "filteration": {
+            "_context": null,
+            "prompt_ids": [
+                53,
+                59,
+                74,
+                90,
+                93
+            ]
+        },
+        "dataset_name": "counter_fact"
+    },
+    "metadata_params": {
+        "code_version": "test_baseline",
+        "requested_batch_size": 1,
+        "with_slurm": false,
+        "slurm_gpu_type": "l40s",
+        "slurm_gpus_per_node": 1,
+        "overwrite_existing_outputs": false,
+        "override_base_project_dir": null
+    },
+    "run_id": "test_run_id",
+    "git_commit_hash": "test_commit_hash"
+}
